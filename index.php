@@ -29,7 +29,7 @@
     <div class="container">
 		
 		<div class="jumbotron">
-			<h1 class="password"><?="correct horse battery staple";?></h1>
+			<h2 class="password"><?=isset($password) ? $password : 'correct horse battery staple';?></h2>
 		</div>
 		
 		<form action="index.php" method="GET">
@@ -40,37 +40,37 @@
 			<h2>Advanced Settings</h2>
 			
 			<div class="form-group">
-				<label for="wordCount">Number of Words</label>
+				<label for="<?=$FORM_GET_Key_wordCount;?>">Number of Words</label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="wordCount" type="number" class="form-control" value="4" />
+						<input id="<?=$FORM_GET_Key_wordCount;?>" name="<?=$FORM_GET_Key_wordCount;?>" type="number" class="form-control" min="1" max="<?=$MAX_WORDCOUNT;?>" value="<?=$m_wordCount;?>" />
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="wordCountRandomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$FORM_GET_Key_wordCount;?>_Randomize" type="button" class="btn btn-default">Randomize</button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="minLength">Minimum Word Length</label>
+				<label for="<?=$FORM_GET_Key_minLength;?>">Minimum Word Length</label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="minLength" type="number" class="form-control" value="1" />
+						<input id="<?=$FORM_GET_Key_minLength;?>" name="<?=$FORM_GET_Key_minLength;?>" type="number" class="form-control" min="1" max="<?=$MAX_LENGTH;?>" value="<?=$m_minLength;?>" />
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="minLengthRandomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$FORM_GET_Key_minLength;?>Randomize" type="button" class="btn btn-default">Randomize</button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="maxLength">Maximum Word Length</label>
+				<label for="<?=$FORM_GET_Key_maxLength;?>">Maximum Word Length</label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="maxLength" type="number" class="form-control" value="17" />
+						<input id="<?=$FORM_GET_Key_maxLength;?>" name="<?=$FORM_GET_Key_maxLength;?>" type="number" class="form-control" min="1" max="<?=$MAX_LENGTH;?>" value="<?=$m_maxLength;?>" />
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="maxLengthRandomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$FORM_GET_Key_maxLength;?>Randomize" type="button" class="btn btn-default">Randomize</button>
 					</div>
 				</div>
 			</div>
@@ -80,45 +80,33 @@
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
 						<div class="form-control">
-						<?php
-							$UI_gradeLevels = Array(
-								'SAT' => 'SAT',
-								'G8' => '8<sup>th</sup>',
-								'G7' => '7<sup>th</sup>',
-								'G6' => '6<sup>th</sup>',
-								'G5' => '5<sup>th</sup>',
-								'G4' => '4<sup>th</sup>',
-								'G3' => '3<sup>rd</sup>',
-								'G2' => '2<sup>nd</sup>',
-								'G1' => '1<sup>st</sup>'
-							);
-						?>
 						<?php foreach($UI_gradeLevels as $key => $value): ?>
 							<label class="checkbox-inline">
-							  <input type="checkbox" id="gradeLevel<?=$key;?>" value="<?=$key;?>"><?=$value;?>
+							  <input type="checkbox" id="<?=$FORM_GET_Key_gradeLevel.$key;?>" name="<?=$FORM_GET_Key_gradeLevel;?>[]" value="<?=$key;?>" <?=isset($m_gradeLevelArr[$key]) ? 'checked="checked"' : '';?> ><?=$value;?></input>
 							</label>
 						<?php endforeach; ?>
 						</div>
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="gradeLevelRandomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$FORM_GET_Key_gradeLevel;?>Randomize" type="button" class="btn btn-default">Randomize</button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="wordSeparator">Word Separator</label>
+				<label for="<?=$FORM_GET_Key_separator;?>">Word Separator</label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="wordSeparator" type="text" class="form-control" value=" " />
+						<input id="<?=$FORM_GET_Key_separator;?>" name="<?=$FORM_GET_Key_separator;?>" type="text" class="form-control" value="<?=$m_separator;?>" />
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="wordSeparatorRandomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$FORM_GET_Key_separator;?>Randomize" type="button" class="btn btn-default">Randomize</button>
 					</div>
 				</div>
 			</div>
 
 			<button type="submit" class="btn btn-primary btn-lg">Regenerate</button>
+			<button type="reset" class="btn btn-default btn-lg">Reset</button>
 		</form>
 		
 		<h2>What is this?</h2>

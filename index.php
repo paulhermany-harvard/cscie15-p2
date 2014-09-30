@@ -6,6 +6,7 @@
     <title>Project 2 | CSCI E-15 Fall 2014 | Paul Hermany</title>
     
     <link rel="stylesheet" href="./css/lib/bootstrap-3.2.0.min.css"/>
+	<link rel="stylesheet" href="./css/lib/bootstrapValidator-0.5.2.min.css"/>
     <link rel="stylesheet" href="./css/app.css"/>
     
     <!--[if lt IE 9]>
@@ -13,8 +14,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	<?php require 'config.php'; ?>
-	<?php require 'index.logic.php'; ?>
+	<?php require 'index.config.php'; ?>
+	<?php require 'chbs.config.php'; ?>
 	
   </head>
   <body>
@@ -29,10 +30,10 @@
     <div class="container">
 		
 		<div class="jumbotron">
-			<h2 class="password"><?=isset($password) ? $password : 'correct horse battery staple';?></h2>
+			<h2 id="password">correct horse battery staple</h2>
 		</div>
 		
-		<form action="index.php" method="GET">
+		<form id="chbs" name="chbs" action="chbs.php" method="POST">
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-lg">Regenerate</button>				
 			</div>
@@ -40,73 +41,112 @@
 			<h2>Advanced Settings</h2>
 			
 			<div class="form-group">
-				<label for="<?=$FORM_GET_Key_wordCount;?>">Number of Words</label>
+				<label for="<?=$m_wordCount_ParamName;?>"><?=$UI_wordCount_Text;?></label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="<?=$FORM_GET_Key_wordCount;?>" name="<?=$FORM_GET_Key_wordCount;?>" type="number" class="form-control" min="1" max="<?=$MAX_WORDCOUNT;?>" value="<?=$m_wordCount;?>" />
+						<input
+							id="<?=$m_wordCount_ParamName;?>"
+							name="<?=$m_wordCount_ParamName;?>"
+							value="<?=$m_wordCount_Constraints['default'];?>"
+							class="form-control error"
+							type="number"
+							min="<?=$m_wordCount_Constraints['min'];?>"
+							max="<?=$m_wordCount_Constraints['max'];?>"
+						/>
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="<?=$FORM_GET_Key_wordCount;?>_Randomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$m_wordCount_ParamName;?>_Randomize" type="button" class="btn btn-default"><?=$UI_randomize_Text;?></button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="<?=$FORM_GET_Key_minLength;?>">Minimum Word Length</label>
+				<label for="<?=$m_minLength_ParamName;?>"><?=$UI_minLength_Text;?></label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="<?=$FORM_GET_Key_minLength;?>" name="<?=$FORM_GET_Key_minLength;?>" type="number" class="form-control" min="1" max="<?=$MAX_LENGTH;?>" value="<?=$m_minLength;?>" />
+						<input
+							id="<?=$m_minLength_ParamName;?>" 
+							name="<?=$m_minLength_ParamName;?>" 
+							value="<?=$m_minLength_AbsoluteMin;?>"
+							class="form-control"
+							type="number" 							
+							min="<?=$m_minLength_AbsoluteMin;?>"
+							max="<?=$m_maxLength_AbsoluteMax;?>"
+						/>
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="<?=$FORM_GET_Key_minLength;?>Randomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$m_minLength_ParamName;?>_Randomize" type="button" class="btn btn-default"><?=$UI_randomize_Text;?></button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="<?=$FORM_GET_Key_maxLength;?>">Maximum Word Length</label>
+				<label for="<?=$m_maxLength_ParamName;?>"><?=$UI_maxLength_Text;?></label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="<?=$FORM_GET_Key_maxLength;?>" name="<?=$FORM_GET_Key_maxLength;?>" type="number" class="form-control" min="1" max="<?=$MAX_LENGTH;?>" value="<?=$m_maxLength;?>" />
+						<input 
+							id="<?=$m_maxLength_ParamName;?>"
+							name="<?=$m_maxLength_ParamName;?>"
+							value="<?=$m_maxLength_AbsoluteMax;?>"
+							class="form-control"
+							type="number"
+							min="<?=$m_minLength_AbsoluteMin;?>"
+							max="<?=$m_maxLength_AbsoluteMax;?>"
+						/>
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="<?=$FORM_GET_Key_maxLength;?>Randomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$m_maxLength_ParamName;?>_Randomize" type="button" class="btn btn-default"><?=$UI_randomize_Text;?></button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label>Grade Level</label>
+				<label><?=$UI_gradeLevel_Text;?></label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
 						<div class="form-control">
 						<?php foreach($UI_gradeLevels as $key => $value): ?>
 							<label class="checkbox-inline">
-							  <input type="checkbox" id="<?=$FORM_GET_Key_gradeLevel.$key;?>" name="<?=$FORM_GET_Key_gradeLevel;?>[]" value="<?=$key;?>" <?=isset($m_gradeLevelArr[$key]) ? 'checked="checked"' : '';?> ><?=$value;?></input>
+								<input
+									id="<?=$m_gradeLevel_ParamName.$key;?>"
+									name="<?=$m_gradeLevel_ParamName;?>[]"
+									value="<?=$key;?>"
+									type="checkbox" 
+									checked="checked" 
+									data-rel-min="<?=$m_gradeLevel_Stats[$key][1];?>" 
+									data-rel-max="<?=$m_gradeLevel_Stats[$key][2];?>">
+									<span><?=$value;?></span>
+								</input>
 							</label>
 						<?php endforeach; ?>
 						</div>
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="<?=$FORM_GET_Key_gradeLevel;?>Randomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$m_gradeLevel_ParamName;?>_Randomize" type="button" class="btn btn-default"><?=$UI_randomize_Text;?></button>
 					</div>
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<label for="<?=$FORM_GET_Key_separator;?>">Word Separator</label>
+				<label for="<?=$m_separator_ParamName;?>"><?=$UI_separator_Text;?></label>
 				<div class="row">
 					<div class="col-sm-10 col-xs-8">
-						<input id="<?=$FORM_GET_Key_separator;?>" name="<?=$FORM_GET_Key_separator;?>" type="text" class="form-control" value="<?=$m_separator;?>" />
+						<input
+							id="<?=$m_separator_ParamName;?>"
+							name="<?=$m_separator_ParamName;?>"
+							type="text"
+							class="form-control"
+							value="<?=$m_separator_Constraints['default'];?>"
+						/>
 					</div>
 					<div class="col-sm-2 col-xs-4">
-						<button id="<?=$FORM_GET_Key_separator;?>Randomize" type="button" class="btn btn-default">Randomize</button>
+						<button id="<?=$m_separator_ParamName;?>_Randomize" type="button" class="btn btn-default"><?=$UI_randomize_Text;?></button>
 					</div>
 				</div>
 			</div>
 
-			<button type="submit" class="btn btn-primary btn-lg">Regenerate</button>
-			<button type="reset" class="btn btn-default btn-lg">Reset</button>
+			<button type="submit" class="btn btn-primary btn-lg"><?=$UI_regenerate_Text;?></button>
+			<button type="reset" class="btn btn-default btn-lg"><?=$UI_reset_Text;?></button>
 		</form>
 		
 		<h2>What is this?</h2>

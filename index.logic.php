@@ -214,5 +214,6 @@
                 break;
         }
     }
-	
-	// $password contains the generated password
+
+	// $password contains the generated password	
+	$password = htmlentities($password);

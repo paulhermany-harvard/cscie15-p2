@@ -50,6 +50,14 @@ require(['jquery', 'bootstrapValidator'], function ($) {
         $('#chbs').bootstrapValidator('addField', 'minLength');
     });
 
+	$('#minLength').change(function(e) {
+		$('#chbs').bootstrapValidator('revalidateField', 'maxLength');
+	});
+
+	$('#maxLength').change(function(e) {
+		$('#chbs').bootstrapValidator('revalidateField', 'minLength');
+	});
+	
     $('#chbs').bootstrapValidator({
         fields: {
             minLength: {

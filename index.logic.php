@@ -180,22 +180,30 @@
 	// generate a plain password (no complexity)
     $password = implode($separator, $words);
     
+	function generateRandomCharacter($type) {
+        switch($type) {
+            case 'symbol': return generateRandomSymbol(); break;
+            case 'number': return generateRandomNumber(); break;
+        }
+	}
+	
+	function generateRandomNumber() {
+		return chr(mt_rand(48, 57));
+	}	
+	
+	function generateRandomSymbol() {
+		$r = mt_rand(0, 3);
+		switch($r) {
+			case 0: $i = mt_rand(33, 47); break;
+			case 1: $i = mt_rand(58, 64); break;
+			case 2: $i = mt_rand(91, 96); break;
+			case 3: $i = mt_rand(123, 126); break;
+		}
+		return chr($i);
+	}
+	
 	// add password complexity based on selected options
     if($complexity_add == true) {
-		// choose character based on ASCII code
-        switch($complexity_a_random) {
-            case 'symbol':
-                $r = mt_rand(0, 3);
-                switch($r) {
-                    case 0: $i = mt_rand(33, 47); break;
-                    case 1: $i = mt_rand(58, 64); break;
-                    case 2: $i = mt_rand(91, 96); break;
-                    case 3: $i = mt_rand(123, 126); break;
-                }
-                $c = chr($i);
-                break;
-            case 'number': $c = chr(mt_rand(48, 57)); break;
-        }
 		// choose whether to prepend or append the character
         switch($complexity_to_the) {
             case 'beginning': $prepend = true; break;
@@ -205,11 +213,13 @@
         switch($complexity_of) {
             case 'each word':       
                 for($i = 0; $i < count($words); $i++) {
+					$c = generateRandomCharacter($complexity_a_random);
                     $words[$i] = $prepend ? ($c.$words[$i]) : ($words[$i].$c);
                     $password = implode($separator, $words);
                 }
                 break;
             case 'the password':
+				$c = generateRandomCharacter($complexity_a_random);
                 $password = $prepend ? ($c.$password) : ($password.$c);
                 break;
         }

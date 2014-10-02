@@ -22,7 +22,7 @@
     <div class="navbar navbar-inverse navbar-static-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="p2.paulhermany.me">XKCD-Style Password Generator</a>
+				<a class="navbar-brand" href="http://p2.paulhermany.me">XKCD-Style Password Generator</a>
 			</div>
 		</div>
     </div>

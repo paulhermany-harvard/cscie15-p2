@@ -48,6 +48,8 @@ require(['jquery', 'bootstrapValidator'], function ($) {
         
         $('#chbs').bootstrapValidator('removeField', 'minLength');
         $('#chbs').bootstrapValidator('addField', 'minLength');
+		
+		
     });
 
 	$('#minLength').change(function(e) {
@@ -57,30 +59,8 @@ require(['jquery', 'bootstrapValidator'], function ($) {
 	$('#maxLength').change(function(e) {
 		$('#chbs').bootstrapValidator('revalidateField', 'minLength');
 	});
-	
+
     $('#chbs').bootstrapValidator({
-        fields: {
-            minLength: {
-                validators: {
-                    between: {
-                        inclusive: true,
-                        min: 'minLength',
-                        max: 'maxLength',
-                        message: 'The minimum length must be less than or equal to the maximum length'
-                    }
-                }
-            },
-            maxLength: {
-                validators: {
-                    between: {
-                        inclusive: true,
-                        min: 'minLength',
-                        max: 'maxLength',
-                        message: 'The maximum length must be greater than or equal to the minimum length'
-                    }
-                }
-            }
-        }
     })
     .on('success.field.bv', function(e, data) {
         // remove success class

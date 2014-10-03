@@ -4,20 +4,17 @@
 <http://p2.paulhermany.me>
 
 ## Description
-An implementation of the "correct horse battery staple" password generator (http://xkcd.com/936/).
+An implementation of the "correct horse battery staple" password generator from XKCD (http://xkcd.com/936/).
 
-This tool will let the user generate a password comprised of one or more common words with several customization options such as grade level, word length, and added complexity characters.
+This tool will let the user generate a password comprised of one or more common words with several customization options such as grade level, word count, word length, and added complexity characters.
 
-### Word Source
-
-The words are sourced from http://www.bigiqkids.com/ and stored in a mysql database by "grade level".
-There are 8797 words in the database, a count that provides just around 13 bits of entropy per symbol (http://en.wikipedia.org/wiki/Password_strength)/
+The words are sourced from http://www.bigiqkids.com/ and stored in a mysql database by "grade level". There are 8797 words in the database, a count that provides just around 13 bits of entropy per symbol (http://en.wikipedia.org/wiki/Password_strength)/.
 
 ## Demo
-No demo available for this project.
+I will provide an in-person demo during the Tuesday section on October 7.
 
 ## Instructions
-No instructions available for this project.
+No special instructions for this project.
 
 ## Third-party plug-ins/libraries
 

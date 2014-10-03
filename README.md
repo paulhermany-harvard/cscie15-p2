@@ -33,7 +33,7 @@ No special instructions for this project.
 
   This website uses Bootstrap with the default theme to provide a responsive user interface that works on mobile and desktop.
 
-* Bootstrap
+* Bootstrap Validator
 
   This website uses Bootstrap Validator for client-side form validation.
   

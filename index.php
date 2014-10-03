@@ -105,21 +105,21 @@
                     <span>
                         <span><?=$complexity_a_random_Text;?></span>
                         <select name="<?=$complexity_a_random_ParamName;?>">
-                            <?php foreach($complexity_a_random_Constraints['values'] as $key): ?>
+<?php foreach($complexity_a_random_Constraints['values'] as $key): ?>
                             <option value="<?=$key;?>" <?=($complexity_a_random == $key ? 'selected="selected"' : '');?> ><?=$key;?></option>
-                            <?php endforeach; ?>
+<?php endforeach; ?>
                         </select>
                         <span><?=$complexity_to_the_Text;?></span>
                         <select name="<?=$complexity_to_the_ParamName;?>">
-                            <?php foreach($complexity_to_the_Constraints['values'] as $key): ?>
+<?php foreach($complexity_to_the_Constraints['values'] as $key): ?>
                             <option value="<?=$key;?>" <?=($complexity_to_the == $key ? 'selected="selected"' : '');?> ><?=$key;?></option>
-                            <?php endforeach; ?>
+<?php endforeach; ?>
                         </select>
                         <span><?=$complexity_of_Text;?></span>
                         <select name="<?=$complexity_of_ParamName;?>">
-                            <?php foreach($complexity_of_Constraints['values'] as $key): ?>
+<?php foreach($complexity_of_Constraints['values'] as $key): ?>
                             <option value="<?=$key;?>" <?=($complexity_of == $key ? 'selected="selected"' : '');?> ><?=$key;?></option>
-                            <?php endforeach; ?>
+<?php endforeach; ?>
                         </select>
                     </span>                 
                 </div>

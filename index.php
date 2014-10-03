@@ -43,12 +43,9 @@
             <div class="form-group">
                 <label for="<?=$gradeLevel_ParamName;?>"><?=$gradeLevel_Text;?></label>
                 <select class="form-control" id="<?=$gradeLevel_ParamName;?>" name="<?=$gradeLevel_ParamName;?>[]" multiple="multiple">
-                    <?php foreach($gradeLevel_Constraints['values'] as $key => $value): ?>
-                    <option value="<?=$key;?>"
-                        <?=(isset($gradeLevel[$key]) ? 'selected="selected"' : '');?>
-                        data-rel-min="<?=$value[1];?>"
-                        data-rel-max="<?=$value[2];?>"><?=$value[3];?></option>
-                    <?php endforeach; ?>
+<?php foreach($gradeLevel_Constraints['values'] as $key => $value): ?>
+                    <option value="<?=$key;?>" <?=(isset($gradeLevel[$key]) ? 'selected="selected"' : '');?> data-rel-min="<?=$value[1];?>" data-rel-max="<?=$value[2];?>"><?=$value[3];?></option>
+<?php endforeach; ?>
                 </select>
             </div>
             
